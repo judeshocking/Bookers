@@ -1,5 +1,25 @@
 <h1>Books</h1>
 
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Body</th>
+		</tr>
+	</thead>
+	<body>
+		<% @books.each do |book| %>
+		<tr>
+			<td><%= book.title %></td>
+			<td><%= book.body %></td>
+			<td><%=link_to "show", book_path(book.id) %></td>
+			<td><%=link_to "edit", edit_book_path(book.id) %></td>
+			<td><%=link_to "destroy", book_path(book.id),method: :delete, "data-confirm" => "Are yuo sure?" %></td>
+		</tr>
+		<% end %>
+	</body>
+</table>
+
 
 
 
