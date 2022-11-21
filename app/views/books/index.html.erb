@@ -1,10 +1,15 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
+
 <h1>Books</h1>
 
 <table>
 	<thead>
 		<tr>
-			<th>Title</th>
-			<th>Body</th>
+			<th class=nav-list>Title</th>
+			<th class=nav-list>Body</th>
 		</tr>
 	</thead>
 	<body>
@@ -25,13 +30,31 @@
 
 
 <h2>New book</h2>
+
+<% if @book.errors.any? %>
+  <%= @book.errors.count %> errors prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model: @book, url: '/books', method: :post do |f| %>
- <h4>Title</h4>
- <%= f.text_field :title %>
+<div class="field">
+	<span>Title</span>
+	<%= f.text_field :title %>
+</div>
 
- <h4>Body</h4>
- <%= f.text_area :body %>
+<div class="field">
+	<span>Body</span>
+	<%= f.text_area :body %>
+</div>
 
- <br><%= f.submit 'Create Book' %></br>
+
+<div class="action">
+	<span><%= f.submit 'Create Book' %></span>
+</div>
+
 
 <% end %>
